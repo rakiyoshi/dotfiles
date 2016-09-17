@@ -119,5 +119,15 @@ set shiftwidth=4
 set clipboard=unnamed,autoselect
 set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
-:syntax on
 set laststatus=2
+set nopaste
+nnoremap o oX<C-h>
+nnoremap O OX<C-h>
+inoremap <CR> <CR>X<C-h>
+syntax on
+"set term=xterm-256color
+colorscheme molokai
+"set t_Co=256
+"let g:molokai_original = 1
+"let g:rehash256 = 1
+"set background=dark
