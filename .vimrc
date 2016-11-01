@@ -107,11 +107,6 @@ filetype plugin indent on
 " vim起動時に未インストールのプラグインをインストールする
 NeoBundleCheck
 
-" スクリプト実行
-autocmd BufNewFile,BufRead *.rb nnoremap <C-e> :!ruby %
-autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python %
-autocmd BufNewFile,BufRead *.pl nnoremap <C-e> :!perl %
-
 set tabstop=4
 set autoindent
 set smartindent
