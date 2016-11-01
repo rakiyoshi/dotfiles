@@ -116,13 +116,11 @@ set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
 set laststatus=2
 set nopaste
+" 空行のインデントを勝手に消さない
 nnoremap o oX<C-h>
 nnoremap O OX<C-h>
+
 inoremap <CR> <CR>X<C-h>
 syntax on
-"set term=xterm-256color
 colorscheme molokai
-"set t_Co=256
-"let g:molokai_original = 1
-"let g:rehash256 = 1
-"set background=dark
+set mouse=nicr
