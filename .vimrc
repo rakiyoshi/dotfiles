@@ -123,4 +123,4 @@ nnoremap O OX<C-h>
 inoremap <CR> <CR>X<C-h>
 syntax on
 colorscheme molokai
-set mouse=nicr
+set mouse=a
