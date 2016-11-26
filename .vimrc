@@ -119,10 +119,13 @@ filetype plugin indent on
 " vim起動時に未インストールのプラグインをインストールする
 NeoBundleCheck
 
+" タブをスペースで
 set tabstop=4
-set autoindent
-set smartindent
 set shiftwidth=4
+set expandtab
+set shiftwidth=4
+
+set smartindent
 set clipboard=unnamed,autoselect
 set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
