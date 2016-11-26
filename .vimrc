@@ -139,3 +139,6 @@ inoremap <CR> <CR>X<C-h>
 syntax on
 colorscheme molokai
 set mouse=a
+
+" <esc>キーを<Ctrl + j>に割り当てる
+imap <C-j> <esc>
