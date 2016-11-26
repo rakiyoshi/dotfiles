@@ -132,8 +132,8 @@ set backspace=indent,eol,start
 set laststatus=2
 set nopaste
 " 空行のインデントを勝手に消さない
-nnoremap o oX<C-h>
-nnoremap O OX<C-h>
+" nnoremap o oX<C-h>
+" nnoremap O OX<C-h>
 
 inoremap <CR> <CR>X<C-h>
 syntax on
