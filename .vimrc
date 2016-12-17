@@ -120,12 +120,12 @@ filetype plugin indent on
 NeoBundleCheck
 
 " タブをスペースで
-set tabstop=4
-set shiftwidth=4
+set smarttab
 set expandtab
+set tabstop=4
+set smartindent
 set shiftwidth=4
 
-set smartindent
 set clipboard=unnamed,autoselect
 set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
