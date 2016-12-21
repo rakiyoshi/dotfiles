@@ -41,6 +41,8 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'justmao945/vim-clang'
 NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'lervag/vimtex'
 
 "set clang options for vim-clang
 let g:clang_c_options = '-std=c11'
@@ -116,6 +118,15 @@ call neobundle#end()
 
 filetype plugin indent on
 
+" vim-quickrunの設定
+let g:quickrun_config = {}
+let g:quickrun_config.tex = {
+            \ 'outputter' : 'error',
+            \ 'command'   : 'latexmk',
+            \ 'outputter/error/error' : 'quickfix',
+            \ 'exec'      : ['%c %s'],
+            \ }
+
 " vim起動時に未インストールのプラグインをインストールする
 NeoBundleCheck
 
@@ -142,3 +153,6 @@ set mouse=a
 
 " <esc>キーを<Ctrl + j>に割り当てる
 imap <C-j> <esc>
+
+" 「vimtex warning: Can't use callbacks without +clientserver」 の回避
+let g:vimtex_latexmk_callback = 0
