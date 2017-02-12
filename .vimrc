@@ -43,6 +43,8 @@ NeoBundle 'justmao945/vim-clang'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'lervag/vimtex'
+NeoBundle 'sophacles/vim-processing'
+au BufNewFile,BufRead *.pyde setf processing
 
 "set clang options for vim-clang
 let g:clang_c_options = '-std=c11'
@@ -119,6 +121,7 @@ call neobundle#end()
 filetype plugin indent on
 
 " vim-quickrunの設定
+" tex
 let g:quickrun_config = {}
 let g:quickrun_config.tex = {
             \ 'outputter' : 'error',
@@ -126,6 +129,11 @@ let g:quickrun_config.tex = {
             \ 'outputter/error/error' : 'quickfix',
             \ 'exec'      : ['%c %s'],
             \ }
+" pyde
+let g:quickrun_config.processing =  {
+      \     'command': 'processing-java',
+      \     'exec': '%c --sketch=$PWD/ --output=/Library/Processing --run --force',
+      \   }
 
 " vim起動時に未インストールのプラグインをインストールする
 NeoBundleCheck
@@ -142,6 +150,8 @@ set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
 set laststatus=2
 set nopaste
+set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
 " 空行のインデントを勝手に消さない
 " nnoremap o oX<C-h>
 " nnoremap O OX<C-h>
@@ -156,3 +166,4 @@ imap <C-j> <esc>
 
 " 「vimtex warning: Can't use callbacks without +clientserver」 の回避
 let g:vimtex_latexmk_callback = 0
+set backupskip=/tmp/*,/private/tmp/*
