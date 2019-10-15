@@ -22,6 +22,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# Charset
+export LESSCHARSET=utf-8
+
 # local
 load_if_exists() {
     if [ -e $1 ]; then
