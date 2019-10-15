@@ -154,6 +154,9 @@ syntax on
 colorscheme molokai
 set mouse=a
 
+" Ctrl+spaceの挙動を安定させる
+imap <Nul> <Nop>
+
 " ローカル設定を読み込み
 augroup vimrc-local
   autocmd!
