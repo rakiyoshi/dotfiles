@@ -32,3 +32,6 @@ load_if_exists() {
     fi
 }
 load_if_exists ~/.zshrc_local
+
+# key-bind
+bindkey \^U backward-kill-line
