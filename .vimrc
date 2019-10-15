@@ -160,9 +160,6 @@ augroup vimrc-local
   autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
 augroup END
 
-" 「vimtex warning: Can't use callbacks without +clientserver」 の回避
-let g:vimtex_latexmk_callback = 0
-set backupskip=/tmp/*,/private/tmp/*
 function! s:vimrc_local(loc)
   let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
   for i in reverse(filter(files, 'filereadable(v:val)'))
