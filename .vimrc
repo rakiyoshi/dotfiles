@@ -32,6 +32,9 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'lervag/vimtex'
 NeoBundle 'sophacles/vim-processing'
+NeoBundle 'scrooloose/syntastic'
+
+
 au BufNewFile,BufRead *.pyde setf processing
 
 "set clang options for vim-clang
@@ -122,6 +125,8 @@ let g:quickrun_config.processing =  {
       \     'command': 'processing-java',
       \     'exec': '%c --sketch=$PWD/ --output=/Library/Processing --run --force',
       \   }
+" syntasticの設定
+let g:syntastic_python_checkers = ['pyflakes', 'pep8']
 
 " vim起動時に未インストールのプラグインをインストールする
 NeoBundleCheck
