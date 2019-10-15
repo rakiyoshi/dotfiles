@@ -23,4 +23,9 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 # local
-source .zshrc_local
+load_if_exists() {
+    if [ -e $1 ]; then
+        source $1
+    fi
+}
+load_if_exists ~/.zshrc_local
