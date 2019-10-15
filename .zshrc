@@ -1,7 +1,7 @@
 # color
 autoload -Uz colors
 colors
-PROMPT="%{${fg[green]}%}%n%{${reset_color}%}%% "
+PROMPT="%{${fg[green]}%}%n@%m%{${reset_color}%}%% "
 
 # complete
 autoload -Uz compinit
