@@ -144,7 +144,7 @@ set backspace=indent,eol,start
 set laststatus=2
 set nopaste
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 " 空行のインデントを勝手に消さない
 " nnoremap o oX<C-h>
 " nnoremap O OX<C-h>
