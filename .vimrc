@@ -154,8 +154,6 @@ syntax on
 colorscheme molokai
 set mouse=a
 
-" <esc>キーを<Ctrl + j>に割り当てる
-imap <C-j> <esc>
 " ローカル設定を読み込み
 augroup vimrc-local
   autocmd!
