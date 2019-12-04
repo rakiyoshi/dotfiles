@@ -151,7 +151,6 @@ set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 
 inoremap <CR> <CR>X<C-h>
 syntax on
-colorscheme molokai
 set mouse=a
 
 " Ctrl+spaceの挙動を安定させる
