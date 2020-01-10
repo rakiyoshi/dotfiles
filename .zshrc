@@ -57,3 +57,8 @@ fi
 
 # PROMPT
 prompt steeef
+
+# WSL
+if [ $(uname -r | grep -i 'microsoft') ]; then
+    umask 022
+fi
