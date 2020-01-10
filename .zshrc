@@ -35,3 +35,9 @@ load_if_exists ~/.zshrc_local
 
 # key-bind
 bindkey \^U backward-kill-line
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
