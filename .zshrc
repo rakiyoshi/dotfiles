@@ -1,7 +1,18 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
 # color
 autoload -Uz colors
 colors
-PROMPT="%{${fg[green]}%}%n@%m%{${reset_color}%}%% "
 
 # complete
 autoload -Uz compinit
@@ -41,3 +52,6 @@ bindkey \^U backward-kill-line
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# PROMPT
+prompt steeef
