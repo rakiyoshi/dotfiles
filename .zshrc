@@ -62,3 +62,6 @@ prompt steeef
 if [ $(uname -r | grep -i 'microsoft') ]; then
     umask 022
 fi
+
+# awscli v2
+source /usr/local/bin/aws_zsh_completer.sh
