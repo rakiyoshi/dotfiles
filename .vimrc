@@ -167,14 +167,6 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
 " ローカル設定を読み込み
-augroup vimrc-local
-  autocmd!
-  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
-augroup END
-
-function! s:vimrc_local(loc)
-  let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
-  for i in reverse(filter(files, 'filereadable(v:val)'))
-    source `=i`
-  endfor
-endfunction
+if filereadable(expand('./.vimrc_local'))
+  source ./.vimrc_local
+endif
