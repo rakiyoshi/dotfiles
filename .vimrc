@@ -33,6 +33,7 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'lervag/vimtex'
 NeoBundle 'sophacles/vim-processing'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 
 au BufNewFile,BufRead *.pyde setf processing
@@ -148,6 +149,7 @@ set nopaste
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set number
+colorscheme industry
 " 空行のインデントを勝手に消さない
 " nnoremap o oX<C-h>
 " nnoremap O OX<C-h>
@@ -158,6 +160,11 @@ set mouse=a
 
 " Ctrl+spaceの挙動を安定させる
 imap <Nul> <Nop>
+
+" enable vim-indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 " ローカル設定を読み込み
 augroup vimrc-local
