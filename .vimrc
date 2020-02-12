@@ -130,6 +130,7 @@ let g:quickrun_config.processing =  {
       \   }
 " syntasticの設定
 let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+let g:syntastic_yaml_checkers = ['yamllint']
 
 " vim起動時に未インストールのプラグインをインストールする
 NeoBundleCheck
