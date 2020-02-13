@@ -96,6 +96,7 @@ autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2
 autocmd FileType sh setlocal ts=2 sts=2 sw=2
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
