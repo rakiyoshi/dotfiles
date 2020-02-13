@@ -178,3 +178,9 @@ let g:indent_guides_guide_size = 1
 if filereadable(expand('./.vimrc_local'))
   source ./.vimrc_local
 endif
+
+" Undo永続化
+if has('persistent_undo')
+    set undodir=~/.vim/undo
+    set undofile
+endif
