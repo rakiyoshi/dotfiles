@@ -30,9 +30,9 @@ SAVEHIST=10000
 
 # pyenv
 if [ -e ${HOME}/.pyenv ]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init -)"
 fi
 
 # Charset
@@ -40,9 +40,9 @@ export LESSCHARSET=utf-8
 
 # local
 load_if_exists() {
-    if [ -e $1 ]; then
-        source $1
-    fi
+  if [ -e $1 ]; then
+    source $1
+  fi
 }
 load_if_exists ~/.zshrc_local
 
@@ -51,8 +51,8 @@ bindkey \^U backward-kill-line
 
 # rbenv
 if [ -e ${HOME}/.rbenv ]; then
-    export PATH="$HOME/.rbenv/bin:$PATH"
-    eval "$(rbenv init -)"
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
 fi
 
 # PROMPT
@@ -60,7 +60,7 @@ prompt steeef
 
 # WSL
 if [ $(uname -r | grep -i 'microsoft') ]; then
-    umask 022
+  umask 022
 fi
 
 # awscli v2
