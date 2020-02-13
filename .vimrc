@@ -175,6 +175,9 @@ let g:indent_guides_guide_size = 1
 
 
 " ローカル設定を読み込み
+if filereadable(expand('~/.vimrc_local'))
+  source ~/.vimrc_local
+endif
 if filereadable(expand('./.vimrc_local'))
   source ./.vimrc_local
 endif
