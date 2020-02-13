@@ -65,3 +65,6 @@ fi
 
 # awscli v2
 source /usr/local/bin/aws_zsh_completer.sh
+
+# snap
+export PATH="/snap/bin:$PATH"
