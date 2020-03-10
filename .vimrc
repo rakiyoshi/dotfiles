@@ -34,6 +34,7 @@ NeoBundle 'lervag/vimtex'
 NeoBundle 'sophacles/vim-processing'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'hashivim/vim-terraform'
 
 
 au BufNewFile,BufRead *.pyde setf processing
@@ -98,6 +99,7 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2
 autocmd FileType sh setlocal ts=2 sts=2 sw=2
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2
 autocmd FileType zsh setlocal ts=2 sts=2 sw=2
+autocmd FileType tf setlocal ts=2 sts=2 sw=2
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -175,6 +177,8 @@ augroup END
 let g:indent_guides_color_change_percent = 5
 let g:indent_guides_guide_size = 1
 
+" Terraform
+let g:terraform_fmt_on_save = 1
 
 " ローカル設定を読み込み
 if filereadable(expand('~/.vimrc_local'))
