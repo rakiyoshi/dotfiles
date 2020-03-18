@@ -1,0 +1,7 @@
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = ['md', 'markdown']
+
+[[plugins]]
+repo = 'vim-terraform'
+on_ft = ['tf', 'terraform']
