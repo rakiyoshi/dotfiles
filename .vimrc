@@ -1,4 +1,3 @@
-" おまじない
 if &compatible
   set nocompatible
 endif
@@ -17,7 +16,7 @@ endif
 
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
-  let s:toml_dir = expand('~/.config/vim')
+  let s:toml_dir = expand('~/.config/nvim')
   call dein#load_toml(s:toml_dir . '/dein.toml', {'lazy': 0})
   call dein#load_toml(s:toml_dir . '/dein_lazy.toml', {'lazy': 1})
   call dein#end()
@@ -31,6 +30,9 @@ syntax enable
 if dein#check_install()
   call dein#install()
 endif
+
+" 自動削除
+let g:dein#auto_recache = 1
 
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -60,7 +62,6 @@ set tabstop=4
 set smartindent
 set shiftwidth=4
 
-set clipboard=unnamed,autoselect
 set whichwrap=b,s,[,],<,>
 set backspace=indent,eol,start
 set laststatus=2

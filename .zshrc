@@ -22,6 +22,7 @@ compinit
 alias ll="ls -l"
 alias la="ls -la"
 alias l="ls -CF"
+alias vim="nvim"
 
 # history
 HISTFILE="$HOME/.zsh_history"
