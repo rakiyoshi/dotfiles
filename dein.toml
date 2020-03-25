@@ -15,3 +15,6 @@ repo = 'scrooloose/syntastic'
 
 [[plugins]]
 repo = 'nathanaelkane/vim-indent-guides'
+
+[[plugins]]
+repo = 'preservim/nerdtree'
