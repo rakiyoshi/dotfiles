@@ -9,6 +9,14 @@ ln -s .dotfiles/.zshrc ~/.zshrc
 - [Installing Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 - [Shougo/dein.vim](https://github.com/Shougo/dein.vim)
 
+```bash:install.sh
+#!/bin/bash
+
+mkdir -p .config
+cd .config
+ln -s ~/.dotfiles/.nvim/ nvim
+```
+
 ## zsh
 - [sorin-ionescu/prezto](https://github.com/sorin-ionescu/prezto)
 
