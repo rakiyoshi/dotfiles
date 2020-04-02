@@ -74,3 +74,8 @@ export PATH="/snap/bin:$PATH"
 
 # tfenv
 export PATH="$HOME/.tfenv/bin:$PATH"
+
+# nodebrew
+if [ -e ${HOME}/.nodebrew ]; then
+	export PATH=$HOME/.nodebrew/current/bin:$PATH
+fi
