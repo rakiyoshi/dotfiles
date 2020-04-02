@@ -9,12 +9,11 @@ ln -s .dotfiles/.zshrc ~/.zshrc
 - [Installing Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 - [Shougo/dein.vim](https://github.com/Shougo/dein.vim)
 
-```bash:install.sh
-#!/bin/bash
-
-mkdir -p .config
-cd .config
-ln -s ~/.dotfiles/.nvim/ nvim
+```bash
+./install.sh
+# nvim-typescript
+cd ~/.cache/dein/repos/github.com/mhartington/nvim-typescript
+./install.sh
 ```
 
 ## zsh
