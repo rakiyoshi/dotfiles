@@ -35,6 +35,11 @@ if [ -e ${HOME}/.pyenv ]; then
   export PATH="$PYENV_ROOT/bin:$PATH"
   eval "$(pyenv init -)"
 fi
+case ${OSTYPE} in
+	darwin*)
+		alias pyenv="SDKROOT=$(xcrun --show-sdk-path) pyenv"
+		;;
+esac
 
 # Charset
 export LESSCHARSET=utf-8
