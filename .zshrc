@@ -84,3 +84,6 @@ export PATH="$HOME/.tfenv/bin:$PATH"
 if [ -e ${HOME}/.nodebrew ]; then
 	export PATH=$HOME/.nodebrew/current/bin:$PATH
 fi
+
+# direnv
+eval "$(direnv hook zsh)"
