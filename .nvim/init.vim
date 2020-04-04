@@ -78,6 +78,7 @@ autocmd FileType ruby setlocal ts=2 sts=2 sw=2
 autocmd FileType zsh setlocal ts=2 sts=2 sw=2
 autocmd FileType tf setlocal ts=2 sts=2 sw=2
 autocmd FileType vim setlocal ts=2 sts=2 sw=2
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2
 
 " 行番号を表示
 set number

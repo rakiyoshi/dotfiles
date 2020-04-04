@@ -36,6 +36,9 @@ on_ft = ['ts', 'typescript']
 
 [[plugins]]
 repo = 'mhartington/nvim-typescript'
-build = './install.sh'
+build = 'sh install.sh'
 on_ft = ['ts', 'typescript']
 depends = ['deoplete.vim']
+hook_source = '''
+  let g:nvim_typescript = 1
+'''
