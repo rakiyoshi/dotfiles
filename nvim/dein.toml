@@ -27,8 +27,7 @@ nnoremap <silent> ,f :<C-u>Denite file/rec<CR>
 nnoremap <silent> ,g :<C-u>Denite grep<CR>
 nnoremap <silent> ,b :<C-u>Denite buffer<CR>
 nnoremap <silent> ,l :<C-u>Denite line<CR>
-'''
-hook_source = '''
+
 " Define denite key mappings
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
@@ -106,9 +105,22 @@ repo = 'Yggdroot/indentLine'
 [[plugins]]
 repo    = 'vim-airline/vim-airline'
 depends = ['vim-airline-themes']
+hook_add = '''
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#readonly#enabled = 0
+let airline_section_b = '%t %M'
+let s:sep = " %{get(g:, 'airline_right_alt_sep', '')} "
+let g:airline_section_y = '%3p%%'
+let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
+let g:airline#extensions#whitespace#enabled = 0
+'''
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 
 [[plugins]]
 repo = 'tomasr/molokai'
+
+# vimを操作
+[[plugins]]
+repo = 'tpope/vim-fugitive'
