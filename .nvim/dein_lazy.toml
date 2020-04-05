@@ -12,8 +12,10 @@
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-hook_source = '''
+hook_add = '''
   let g:deoplete#enable_at_startup = 1
+'''
+hook_source = '''
   inoremap <expr><tab> pumvisible() ? "\<C-n>" :
         \ neosnippet#expandable_or_jumpable() ?
         \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
@@ -34,10 +36,14 @@ on_i  = 1
 on_ft = ['snippet']
 depends = ['neosnippet-snippets']
 
+
+# Terraform
 [[plugins]]
 repo = 'hashivim/vim-terraform'
 on_ft = ['tf', 'terraform']
 
+
+# Typescript
 [[plugins]]
 repo = 'HerringtonDarkholme/yats.vim'
 on_i = 1
@@ -48,9 +54,11 @@ on_ft = ['ts', 'typescript']
 
 [[plugins]]
 repo = 'mhartington/nvim-typescript'
-build = 'sh install.sh'
 on_ft = ['ts', 'typescript']
-depends = ['deoplete.vim']
-hook_source = '''
-  let g:nvim_typescript = 1
+hook_add = '''
+  let g:nvim_typescript#default_mappings = 1
+  let g:nvim_typescript#javascript_support = 1
+'''
+hook_post_update = '''
+  let g:dein#plugin.build = './install.sh'
 '''
