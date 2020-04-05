@@ -87,6 +87,10 @@ set number
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 
+" Splitの方向
+set splitright
+set splitbelow
+
 " Undo永続化
 if has('persistent_undo')
   set undodir=~/.vim/undo

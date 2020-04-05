@@ -8,6 +8,7 @@ ln -s .dotfiles/.zshrc ~/.zshrc
 ## neovim
 - [Installing Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 - [Shougo/dein.vim](https://github.com/Shougo/dein.vim)
+	- ag([ggreer/the_silver_searcher](https://github.com/ggreer/the_silver_searcher))
 
 ```bash
 ./install.sh
