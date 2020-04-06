@@ -70,8 +70,9 @@ if [ $(uname -r | grep -i 'microsoft') ]; then
 fi
 
 # awscli v2
-if [ -e /usr/local/bin/aws_zsh_completer.sh ]; then
-	source /usr/local/bin/aws_zsh_completer.sh
+if [ -e /usr/local/bin/aws_completer ]; then
+  autoload bashcompinit && bashcompinit
+  complete -C '/usr/local/bin/aws_completer' aws
 fi
 
 # snap
