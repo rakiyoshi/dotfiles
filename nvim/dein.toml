@@ -121,6 +121,6 @@ repo = 'vim-airline/vim-airline-themes'
 [[plugins]]
 repo = 'tomasr/molokai'
 
-# vimを操作
+# gitを操作
 [[plugins]]
 repo = 'tpope/vim-fugitive'
