@@ -87,11 +87,19 @@ let s:denite_default_options = {
 call denite#custom#option('default', s:denite_default_options)
 '''
 
+# 非同期処理
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 
+# Lint
 [[plugins]]
-repo = 'scrooloose/syntastic'
+repo = 'vim-syntastic/syntastic'
+hook_add = '''
+let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+let g:syntastic_yaml_checkers = ['yamllint']
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
+let g:syntastic_ruby_checkers = ['rubocop']
+'''
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
@@ -115,6 +123,7 @@ let g:airline_section_z = get(g:, 'airline_linecolumn_prefix', '').'%3l:%-2v'
 let g:airline#extensions#whitespace#enabled = 0
 '''
 
+# Theme
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 

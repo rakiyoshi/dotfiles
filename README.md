@@ -16,6 +16,11 @@ ln -s .dotfiles/.zshrc ~/.zshrc
 cd ~/.cache/dein/repos/github.com/mhartington/nvim-typescript
 ./install.sh
 ```
+- [vim-syntastic/syntastic](https://github.com/vim-syntastic/syntastic)
+    - rubocop
+    - yamllint
+    - pyflakes
+    - pep8
 
 ## zsh
 - [sorin-ionescu/prezto](https://github.com/sorin-ionescu/prezto)

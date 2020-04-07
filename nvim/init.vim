@@ -47,10 +47,6 @@ let g:dein#auto_recache = 1
 " プラグイン設定
 "----------------------------------------------------------------------
 
-" syntasticの設定
-let g:syntastic_python_checkers = ['pyflakes', 'pep8']
-let g:syntastic_yaml_checkers = ['yamllint']
-
 " indentLine
 let g:indentLine_char = '¦'
 
