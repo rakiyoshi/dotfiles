@@ -62,3 +62,8 @@ hook_add = '''
 hook_post_update = '''
   let g:dein#plugin.build = './install.sh'
 '''
+
+# Ruby
+[[plugins]]
+repo = 'tpope/vim-endwise'
+on_ft = ['ruby']
