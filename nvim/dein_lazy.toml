@@ -67,3 +67,6 @@ hook_post_update = '''
 [[plugins]]
 repo = 'tpope/vim-endwise'
 on_ft = ['ruby']
+
+[[plugins]]
+repo = 'takkii/Bignyanco'
