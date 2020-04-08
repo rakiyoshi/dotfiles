@@ -41,6 +41,9 @@ depends = ['neosnippet-snippets']
 [[plugins]]
 repo = 'hashivim/vim-terraform'
 on_ft = ['tf', 'terraform']
+hook_source = '''
+let g:terraform_fmt_on_save = 1
+'''
 
 
 # Typescript

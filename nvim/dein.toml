@@ -108,6 +108,9 @@ repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
+hook_add = '''
+let g:indentLine_char = '¦'
+'''
 
 [[plugins]]
 repo    = 'vim-airline/vim-airline'
@@ -125,6 +128,9 @@ let g:airline#extensions#whitespace#enabled = 0
 # Theme
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
+hook_add = '''
+let g:airline_theme = 'molokai'
+'''
 
 [[plugins]]
 repo = 'tomasr/molokai'
