@@ -15,6 +15,28 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# 補完
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = '''
+let g:asyncomplete_auto_popup = 1
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+hook_add = '''
+let g:lsp_settings_servers_dir = expand('~').'/.local/share/vim-lsp-settings/servers'
+'''
+
 # Denite
 # 参考:
 # https://zaief.jp/vim/denite/
@@ -106,9 +128,6 @@ let g:syntastic_yaml_checkers = ['yamllint']
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 '''
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
