@@ -10,6 +10,55 @@
 #
 # 参考: https://qiita.com/delphinus/items/cd221a450fd23506e81a
 
+
+# 補完
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = '''
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_popup_delay = 0
+let g:asyncomplete_remove_duplicates = 1
+let g:asyncomplete_smart_completion = 1
+" Tab completion
+inoremap <expr> <Tab>   pumvisible() ? "<C-n>" : "<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "<C-p>" : "<S-Tab>"
+" neosnippet
+call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
+  \ 'name': 'neosnippet',
+  \ 'whitelist': ['*'],
+  \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
+  \ }))
+'''
+on_i = 1
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+depends = ['vim-lsp']
+on_source = ['asyncomplete.vim']
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+hook_add = '''
+let g:lsp_settings_servers_dir = expand('~').'/.local/share/vim-lsp-settings/servers'
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+depends = ['neosnippet-snippets']
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-neosnippet.vim'
+hook_add = '''
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+'''
+depends = ['neosnippet.vim']
+on_source = ['asyncomplete.vim']
+
 # Terraform
 [[plugins]]
 repo = 'hashivim/vim-terraform'
@@ -23,17 +72,6 @@ on_i = 1
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
 on_ft = ['ts', 'typescript']
-
-[[plugins]]
-repo = 'mhartington/nvim-typescript'
-on_ft = ['ts', 'typescript']
-hook_add = '''
-  let g:nvim_typescript#default_mappings = 1
-  let g:nvim_typescript#javascript_support = 1
-'''
-hook_post_update = '''
-  let g:dein#plugin.build = './install.sh'
-'''
 
 # Ruby
 [[plugins]]

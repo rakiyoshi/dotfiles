@@ -17,27 +17,12 @@ repo = 'Shougo/dein.vim'
 
 # 補完
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-hook_add = '''
-let g:asyncomplete_remove_duplicates = 1
-let g:asyncomplete_smart_completion = 1
-let g:asyncomplete_auto_popup = 1
-'''
-
-[[plugins]]
 repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
+depends = ['async.vim']
 
-[[plugins]]
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-hook_add = '''
-let g:lsp_settings_servers_dir = expand('~').'/.local/share/vim-lsp-settings/servers'
-'''
 
 # Denite
 # 参考:
