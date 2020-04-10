@@ -62,7 +62,10 @@ on_source = ['asyncomplete.vim']
 # Terraform
 [[plugins]]
 repo = 'hashivim/vim-terraform'
-on_ft = ['terraform']
+on_ft = ['tf', 'terraform']
+hook_add = '''
+let g:terraform_fmt_on_save = 1
+'''
 
 # Typescript
 [[plugins]]
