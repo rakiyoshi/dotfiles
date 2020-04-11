@@ -22,6 +22,8 @@ let g:asyncomplete_smart_completion = 1
 " Tab completion
 inoremap <expr> <Tab>   pumvisible() ? "<C-n>" : "<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "<C-p>" : "<S-Tab>"
+'''
+hook_source = '''
 " neosnippet
 call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_options({
   \ 'name': 'neosnippet',
@@ -29,18 +31,12 @@ call asyncomplete#register_source(asyncomplete#sources#neosnippet#get_source_opt
   \ 'completor': function('asyncomplete#sources#neosnippet#completor'),
   \ }))
 '''
-on_i = 1
+on_event = 'InsertEnter'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
 depends = ['vim-lsp']
 on_source = ['asyncomplete.vim']
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-hook_add = '''
-let g:lsp_settings_servers_dir = expand('~').'/.local/share/vim-lsp-settings/servers'
-'''
 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
@@ -62,19 +58,15 @@ on_source = ['asyncomplete.vim']
 # Terraform
 [[plugins]]
 repo = 'hashivim/vim-terraform'
-on_ft = ['tf', 'terraform']
+on_ft = ['terraform']
 hook_add = '''
 let g:terraform_fmt_on_save = 1
 '''
 
 # Typescript
 [[plugins]]
-repo = 'HerringtonDarkholme/yats.vim'
-on_i = 1
-
-[[plugins]]
 repo = 'leafgarland/typescript-vim'
-on_ft = ['ts', 'typescript']
+on_ft = ['typescript']
 
 # Ruby
 [[plugins]]
