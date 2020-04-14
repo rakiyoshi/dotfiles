@@ -160,3 +160,11 @@ repo = 'tomasr/molokai'
 # gitを操作
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+
+
+# NerdTree
+[[plugins]]
+repo = 'preservim/nerdtree'
+hook_add = '''
+let NERDTreeShowHidden=1
+'''
