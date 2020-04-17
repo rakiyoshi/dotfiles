@@ -91,6 +91,11 @@ if has('persistent_undo')
   set undofile
 endif
 
+" Clipboard (mac)
+if system('uname') == "Darwin\n"
+  set clipboard=unnamed
+endif
+
 " Terminal modeのショートカット変更
 tnoremap <silent> <ESC> <C-\><C-n>
 
