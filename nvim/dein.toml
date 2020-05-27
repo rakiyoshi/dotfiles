@@ -62,10 +62,10 @@ let g:lsp_settings_servers_dir = expand('~').'/.local/share/vim-lsp-settings/ser
 repo = 'Shougo/denite.nvim'
 hook_add = '''
 " Define mappings
-nnoremap <silent> ,f :<C-u>Denite file/rec<CR>
-nnoremap <silent> ,g :<C-u>Denite grep<CR>
-nnoremap <silent> ,b :<C-u>Denite buffer<CR>
-nnoremap <silent> ,l :<C-u>Denite line<CR>
+nnoremap <silent> ,f :<C-u>DeniteProjectDir file/rec<CR>
+nnoremap <silent> ,g :<C-u>DeniteProjectDir grep<CR>
+nnoremap <silent> ,b :<C-u>DeniteProjectDir buffer<CR>
+nnoremap <silent> ,l :<C-u>DeniteProjectDir line<CR>
 
 " Define denite key mappings
 autocmd FileType denite call s:denite_my_settings()
