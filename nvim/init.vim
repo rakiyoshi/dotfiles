@@ -62,6 +62,7 @@ autocmd FileType zsh setlocal ts=2 sts=2 sw=2
 autocmd FileType tf setlocal ts=2 sts=2 sw=2
 autocmd FileType vim setlocal ts=2 sts=2 sw=2
 autocmd FileType typescript setlocal ts=2 sts=2 sw=2
+autocmd FileType markdown setlocal ts=2 sts=2 sw=2
 
 " True Color
 set termguicolors
@@ -95,6 +96,9 @@ endif
 if system('uname') == "Darwin\n"
   set clipboard=unnamed
 endif
+
+" JSONのダブルクォーテーションを隠さない
+set conceallevel=0
 
 " Terminal modeのショートカット変更
 tnoremap <silent> <ESC> <C-\><C-n>
