@@ -59,17 +59,6 @@ autocmd FileType vim setlocal ts=2 sts=2 sw=2
 autocmd FileType typescript setlocal ts=2 sts=2 sw=2
 autocmd FileType markdown setlocal ts=2 sts=2 sw=2
 
-" True Color
- set termguicolors
-
-" Floating color
-set winblend=30
-hi NormalFloat guifg=#eceff4 guibg=#5e81ac gui=bold
-
-" Completion color
-set pumblend=10
-hi Pmenu ctermfg=white ctermbg=darkcyan
-
 " 行番号を表示
 set number
 
