@@ -2,11 +2,6 @@ if !&compatible
   set nocompatible
 endif
 
-" reset augroup
-augroup MyAutoCmd
-  autocmd!
-augroup END
-
 "----------------------------------------------------------------------
 " Dein設定
 "----------------------------------------------------------------------
@@ -43,9 +38,9 @@ endif
 " 自動削除
 let g:dein#auto_recache = 1
 
-"----------------------------------------------------------------------
-" 基本設定
-"----------------------------------------------------------------------
+""----------------------------------------------------------------------
+"" 基本設定
+""----------------------------------------------------------------------
 
 " タブをスペースで
 set smarttab
@@ -65,7 +60,7 @@ autocmd FileType typescript setlocal ts=2 sts=2 sw=2
 autocmd FileType markdown setlocal ts=2 sts=2 sw=2
 
 " True Color
-set termguicolors
+ set termguicolors
 
 " Floating color
 set winblend=30
