@@ -89,7 +89,7 @@ tnoremap <silent> <ESC> <C-\><C-n>
 
 " Spell Check
 set spell
-set spellang=en,cjk
+set spelllang=en,cjk
 
 " ローカル設定を読み込み
 if filereadable(expand('~/.vimrc_local'))
