@@ -1,0 +1,11 @@
+[user]
+	name = Ryoh Akiyoshi
+	email = ryo614@gmail.com
+[core]
+	editor = vim
+	excludesfile = /Users/ryo.akiyoshi/.gitignore_global
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
