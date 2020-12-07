@@ -45,3 +45,11 @@ let g:flake8_quickfix_height=7 " Quickfixの高さ
 let g:flake8_show_in_gutter=1  " 左端にシンボルを表示
 let g:flake8_show_in_file=1  " ファイル内にマークを表示
 '''
+
+# JSX syntax
+[[plugins]]
+repo = 'maxmellon/vim-jsx-pretty'
+on_ft = ['typescriptreact']
+hook_add = '''
+let g:vim_jsx_pretty_colorful_config = 1
+'''
