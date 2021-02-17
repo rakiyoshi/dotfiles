@@ -57,6 +57,10 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 repo = 'mattn/vim-lsp-settings'
 hook_add='''
 let g:lsp_settings_servers_dir = expand('~/.local/share/vim-lsp-settings/servers')
+let g:lsp_settings_filetype_terraform = ['terraform-ls']
+let g:lsp_settings = {
+\ 'terraform-ls': {'cmd': ['terraform-ls', 'serve'] }
+\}
 '''
 
 
