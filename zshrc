@@ -82,7 +82,13 @@ fi
 # direnv
 eval "$(direnv hook zsh)"
 
-[[ -s "/home/aky/.gvm/scripts/gvm" ]] && source "/home/aky/.gvm/scripts/gvm"
+[[ -s "${HOME}/.gvm/scripts/gvm" ]] && source "${HOME}/.gvm/scripts/gvm"
 
 # History Ignore
 HISTORY_IGNORE="(ls|cd|rm|git|rmdir|mv|cp|export|exit)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "${HOME}/.google-cloud-sdk/path.zsh.inc" ]; then . "${HOME}/.google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "${HOME}/.google-cloud-sdk/completion.zsh.inc" ]; then . "${HOME}/.google-cloud-sdk/completion.zsh.inc"; fi
