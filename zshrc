@@ -89,3 +89,8 @@ HISTORY_IGNORE="(ls|cd|rm|git|rmdir|mv|cp|export|exit)"
 
 # iTerm2
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# golang
+mkdir -p ${HOME}/.go
+export GOPATH=${HOME}/.go
+export PATH=${PATH}:${GOPATH}/bin
