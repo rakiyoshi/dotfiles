@@ -6,6 +6,7 @@ cd ${HOME}
 mkdir -p ~/.config
 cd ~/.config
 ln -s ~/.dotfiles/nvim .
+mkdir ~/.vim
 cd ${HOME}
 
 # env
