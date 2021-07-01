@@ -86,3 +86,6 @@ eval "$(direnv hook zsh)"
 
 # History Ignore
 HISTORY_IGNORE="(ls|cd|rm|git|rmdir|mv|cp|export|exit)"
+
+# iTerm2
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
