@@ -100,3 +100,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 mkdir -p ${HOME}/.go
 export GOPATH=${HOME}/.go
 export PATH=${PATH}:${GOPATH}/bin
+
+# gpgkey
+export GPG_TTY=$(tty)
