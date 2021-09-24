@@ -33,3 +33,17 @@ cd ~/.cache/dein/repos/github.com/mhartington/nvim-typescript
 
 ## terraform
 - [tfutils/tfenv](https://github.com/tfutils/tfenv)
+
+## aws-sso-util
+
+```bash
+SSO_START_URL=
+SSO_REGION=
+aws-sso-util configure populate \
+  --sso-start-url ${SSO_START_URL} \
+  --sso-region ${SSO_REGION} \
+  --region ap-northeast-1 \
+  --config-default output=yaml \
+  --raw-account-names \
+  --profile-name-process ${HOME}/.dotfiles/aws-sso-util/profile_formatter.py
+```
