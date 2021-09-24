@@ -103,3 +103,6 @@ export PATH=${PATH}:${GOPATH}/bin
 
 # gpgkey
 export GPG_TTY=$(tty)
+
+# pipx
+export PATH="$PATH:${HOME}/.local/bin"
