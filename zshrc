@@ -106,3 +106,6 @@ export GPG_TTY=$(tty)
 
 # pipx
 export PATH="$PATH:${HOME}/.local/bin"
+
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
