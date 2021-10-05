@@ -7,11 +7,7 @@ printf '\nsource "$HOME/.homesick/repos/homeshick/homeshick.sh"' >> $HOME/.bashr
 source .bashrc
 
 # nvim
-mkdir -p ~/.config
-cd ~/.config
-ln -s ~/.dotfiles/nvim .
-mkdir ~/.vim
-cd ${HOME}
+homeshick clone rakiyoshi/vim-castle
 
 # env
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
