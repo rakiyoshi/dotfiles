@@ -110,3 +110,7 @@ export PATH="$PATH:${HOME}/.local/bin"
 # homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 fpath=($HOME/.homesick/repos/homeshick/completions $fpath)
+
+# deno
+export DENO_INSTALL="${HOME}/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
