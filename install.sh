@@ -10,6 +10,7 @@ source .bashrc
 # homeshick castles
 homeshick clone rakiyoshi/vim-castle
 homeshick clone rakiyoshi/asdf-castle
+homeshick clone rakiyoshi/git-castle
 
 # asdf
 asdf plugin-add go
@@ -17,10 +18,6 @@ asdf plugin-add nodejs
 asdf plugin-add python
 asdf plugin-add ruby
 asdf plugin-add terraform
-
-# git
-ln -s ~/.dotfiles/gitconfig .gitconfig
-ln -s ~/.dotfiles/gitignore_global .gitignore_global
 
 # zsh
 ln -s ~/.dotfiles/zshrc .zshrc
