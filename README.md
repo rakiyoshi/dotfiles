@@ -2,7 +2,7 @@
 
 ```
 git clone https://github.com/rakiyoshi/dotfiles.git ~/.dotfiles
-ln -s .dotfiles/.zshrc ~/.zshrc
+~/.dotfiles/install.sh
 ```
 
 ## neovim
@@ -16,25 +16,20 @@ ln -s .dotfiles/.zshrc ~/.zshrc
 cd ~/.cache/dein/repos/github.com/mhartington/nvim-typescript
 ./install.sh
 ```
-- [vim-syntastic/syntastic](https://github.com/vim-syntastic/syntastic)
+- Requirement for [vim-syntastic/syntastic](https://github.com/vim-syntastic/syntastic)
     - rubocop
     - yamllint
     - pyflakes
     - pep8
 
-## zsh
-- [sorin-ionescu/prezto](https://github.com/sorin-ionescu/prezto)
+## homeshick
+[andsens/homeshick](https://github.com/andsens/homeshick)
 
-## python
-- [pyenv/pyenv](https://github.com/pyenv/pyenv)
-
-## ruby
-- [rbenv/rbenv](https://github.com/rbenv/rbenv)
-
-## terraform
-- [tfutils/tfenv](https://github.com/tfutils/tfenv)
+## asdf
+[asdf-vm/asdf](https://github.com/asdf-vm/asdf)
 
 ## aws-sso-util
+Set up profile
 
 ```bash
 SSO_START_URL=
