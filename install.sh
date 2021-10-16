@@ -2,18 +2,21 @@
 
 cd ${HOME}
 
+# homeshick
 git clone https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick
 printf '\nsource "$HOME/.homesick/repos/homeshick/homeshick.sh"' >> $HOME/.bashrc
 source .bashrc
 
-# nvim
+# homeshick castles
 homeshick clone rakiyoshi/vim-castle
+homeshick clone rakiyoshi/asdf-castle
 
-# env
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-git clone https://github.com/tfutils/tfenv.git ~/.tfenv
-curl -sfL https://direnv.net/install.sh | bash
+# asdf
+asdf plugin-add go
+asdf plugin-add nodejs
+asdf plugin-add python
+asdf plugin-add ruby
+asdf plugin-add terraform
 
 # git
 ln -s ~/.dotfiles/gitconfig .gitconfig
