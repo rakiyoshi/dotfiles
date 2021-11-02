@@ -87,3 +87,6 @@ source ${HOME}/.asdf/asdf.sh
 fpath=(${HOME}/.asdf/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
+# direnv
+eval "$(direnv hook zsh)"
+source <(kubectl completion zsh)
