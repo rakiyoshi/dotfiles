@@ -87,10 +87,3 @@ source ${HOME}/.asdf/asdf.sh
 fpath=(${HOME}/.asdf/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
-# direnv
-eval "$(direnv hook zsh)"
-source <(kubectl completion zsh)
-
-export PATH=/home/aky/.oci/bin:$PATH
-
-[[ -e "/home/aky/.oci/lib/oracle-cli/lib/python3.10/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/aky/.oci/lib/oracle-cli/lib/python3.10/site-packages/oci_cli/bin/oci_autocomplete.sh"
