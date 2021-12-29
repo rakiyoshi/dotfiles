@@ -83,14 +83,19 @@ export PATH="$DENO_INSTALL/bin:$PATH"
 
 # asdf
 source ${HOME}/.asdf/asdf.sh
+
 # append completions to fpath
 fpath=(${HOME}/.asdf/completions $fpath)
+
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
+
 # direnv
 eval "$(direnv hook zsh)"
+
+# kubectl
 source <(kubectl completion zsh)
 
-export PATH=/home/aky/.oci/bin:$PATH
-
-[[ -e "/home/aky/.oci/lib/oracle-cli/lib/python3.10/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/aky/.oci/lib/oracle-cli/lib/python3.10/site-packages/oci_cli/bin/oci_autocomplete.sh"
+# OCI
+export PATH=${HOME}/.oci/bin:$PATH
+[[ -e "${HOME}/.oci/lib/oracle-cli/lib/python3.10/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "${HOME}/.oci/lib/oracle-cli/lib/python3.10/site-packages/oci_cli/bin/oci_autocomplete.sh"
