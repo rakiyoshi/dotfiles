@@ -26,7 +26,7 @@ trivy = "0.76.1"
 "aqua:int128/ghcp" = "1.13.5"
 "aqua:suzuki-shunsuke/ci-info" = "2.4.4"
 "aqua:suzuki-shunsuke/github-comment" = "6.3.1"
-"aqua:suzuki-shunsuke/tfcmt" = "4.14.1"
+"aqua:suzuki-shunsuke/tfcmt" = "4.14.20"
 "go:github.com/hashicorp/terraform-config-inspect" = "d2d12f9a63bbb1fe34ea81ec84c9cb11d8514c17"
 
 [settings]
