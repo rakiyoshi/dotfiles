@@ -13,7 +13,7 @@ for arg in "$@"; do
     --dry-run) dry_run=true ;;
     -h|--help)
       echo 'Usage: bash install.sh [--migrate] [--change-shell] [--link-only] [--dry-run]'
-      echo '  --migrate       Back up and retire fish config, ~/.tool-versions, and ~/.asdfrc.'
+      echo '  --migrate       Back up and retire fish, asdf, and legacy Aqua configuration.'
       echo '  --change-shell  Change the login shell after linking and checking zsh.'
       echo '  --link-only     Skip mise installation and tool installation.'
       echo '  --dry-run       Show configuration changes without writing anything.'

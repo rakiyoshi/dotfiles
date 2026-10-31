@@ -6,9 +6,14 @@ export LESSCHARSET=utf-8
 # Inherited fish/asdf/rbenv paths must not override mise's version selection.
 path=(${path:#${HOME}/.asdf/*})
 path=(${path:#${HOME}/.rbenv/shims})
+# Remove Aqua paths inherited from an already-running terminal as well.
+for _aqua_root in "${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}" \
+                  "${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua"; do
+  path=(${path:#${_aqua_root}/*})
+done
+unset AQUA_GLOBAL_CONFIG AQUA_ROOT_DIR _aqua_root
 path=(
   "$HOME/.local/bin"
-  "${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua/bin"
   /opt/nvim-linux-x86_64/bin
   "$GOPATH/bin"
   "$HOME/.cargo/bin"
@@ -18,7 +23,6 @@ path=(
   /snap/bin
   $path
 )
-export AQUA_GLOBAL_CONFIG="$HOME/aqua.yaml:${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml"
 
 if [[ "$OSTYPE" == darwin* && -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
