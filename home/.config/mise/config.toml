@@ -12,7 +12,7 @@ gh = "2.83.0"
 ecspresso = "2.6.3"
 # Existing Aqua tool versions, except the approved Trivy upgrade below.
 actionlint = "1.7.12"
-aws = "2.31.32"
+aws = "2.39.3"
 conftest = "0.56.0"
 golangci-lint = "2.4.0"
 opa = "1.1.0"
