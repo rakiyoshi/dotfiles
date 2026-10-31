@@ -6,12 +6,37 @@ or shell plugin manager is required. `ConEmu.xml` remains available for Windows.
 
 ## Install
 
+### macOS on Apple Silicon (M2)
+
+Use a native arm64 Terminal session (`uname -m` should print `arm64`), not a
+Rosetta session. The installer uses macOS's included `/bin/bash` and `/bin/zsh`;
+no upgraded Bash or additional shell registration is required.
+
+Install Xcode Command Line Tools if needed (`xcode-select --install`), then
+install native [Homebrew](https://brew.sh/) in `/opt/homebrew`. With Homebrew
+available, install the bootstrap/editor packages:
+
+```sh
+eval "$(/opt/homebrew/bin/brew shellenv)"
+brew install python neovim git-lfs
+```
+
+The supported target is macOS 15 or newer on Apple Silicon, matching the native
+arm64 CI runner and Homebrew's supported macOS baseline. CLI/runtime versions
+are installed by mise; Homebrew supplies bootstrap and editor packages.
+The installer initializes Homebrew before checking prerequisites, and zsh loads
+its completions. WSL-only SSH relay code stays inactive on macOS.
+
+### Ubuntu / WSL
+
 On Ubuntu/WSL, install the prerequisites in your terminal:
 
 ```sh
 sudo apt-get update
 sudo apt-get install -y zsh git curl python3
 ```
+
+### Both platforms
 
 Clone this repository anywhere you intend to keep it permanently, then install:
 
@@ -49,10 +74,8 @@ recreated any environments and packages that refer to their absolute paths.
 
 ### Tool versions
 
-Versions live in `home/.config/mise/config.toml`. Ruby was upgraded, at the
-owner's request, to the latest stable version resolved on 2026-10-31: **4.0.9**.
-The other asdf pins were preserved: Python 3.14.2, Go 1.24.2, Node 16.13.0,
-Terraform 1.1.8, direnv 2.36.0, Helm 3.7.1, and kubectl 1.23.1.
+Current version pins live in `home/.config/mise/config.toml` and are updated by
+Renovate. See `docs/` for historical migration versions and decisions.
 Installations are native mise installs, independent of the old asdf runtimes.
 Previously installed Ruby gems and Python packages are not automatically copied.
 
@@ -62,8 +85,8 @@ Terraform utilities are pinned in the same mise configuration. The migration
 preserves installed tool versions, except Trivy: 0.61.1 was unavailable for
 download, so it was upgraded to 0.76.1 with the owner's approval.
 
-The first Go/Terraform version in each list remains the default. The former
-global Aqua versions (Go 1.27.1 and Terraform 1.13.5) are installed as alternatives.
+The first Go/Terraform version in each list is the default. Secondary versions
+remain available as alternatives; Renovate updates only the primary versions.
 Use a project's mise configuration to select a different version when needed.
 
 Some tool identifiers start with `aqua:`. These select mise's built-in registry
@@ -125,10 +148,10 @@ absolute Aqua installation path. No credential/token files are stored here.
 
 ## Verify
 
-Open a new WSL terminal, then run:
+Open a new terminal, then run:
 
 ```sh
-getent passwd "$(id -un)" | cut -d: -f7
+zsh --version
 mise doctor
 mise ls
 ruby --version
@@ -144,7 +167,9 @@ The installer prints the exact backup path and restore command:
 
 ```sh
 python3 ~/dotfiles/scripts/link.py --restore ~/.local/state/dotfiles/backups/TIMESTAMP
-chsh -s /usr/bin/fish
+# If needed, restore your previous login shell using its actual installed path:
+# chsh -s /opt/homebrew/bin/fish   # macOS with Homebrew fish
+# chsh -s /usr/bin/fish           # Ubuntu / WSL
 ```
 
 Rollback restores the previous files and symlink targets, including the fish
@@ -155,6 +180,15 @@ castle checkouts until you no longer need rollback.
 
 ```sh
 python3 -m unittest discover -s tests -v
-bash -n install.sh home/.local/bin/wsl-ssh-agent
-zsh -n home/.zshrc home/.zprofile home/.zshenv home/.config/zsh/environment.zsh
+for script in install.sh scripts/*.sh home/.local/bin/wsl-ssh-agent; do
+  bash -n "$script"
+done
+for script in home/.zshrc home/.zprofile home/.zshenv home/.config/zsh/environment.zsh; do
+  zsh -n "$script"
+done
 ```
+
+GitHub Actions runs installer/rollback tests on Ubuntu and native Apple Silicon
+macOS 15. A separate macOS job installs the complete pinned toolset and plugins
+in an isolated home, then checks zsh startup and mise. The account's login shell
+is never changed by CI.
