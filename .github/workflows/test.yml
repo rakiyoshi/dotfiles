@@ -1,0 +1,67 @@
+name: Test dotfiles
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  installer:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Linux test prerequisite
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y zsh
+      - name: Test installer and rollback with the system Bash
+        env:
+          DOTFILES_TEST_BASH: /bin/bash
+        run: python3 -m unittest discover -s tests -v
+      - name: Check shell syntax
+        run: |
+          for script in install.sh scripts/platform.sh scripts/install-zsh-plugins.sh home/.local/bin/wsl-ssh-agent; do
+            /bin/bash -n "$script"
+          done
+          for script in home/.zshenv home/.zprofile home/.zshrc home/.config/zsh/environment.zsh; do
+            zsh -n "$script"
+          done
+      - name: Install linked configuration in an isolated home
+        run: |
+          test_home=$(mktemp -d)
+          HOME="$test_home" XDG_CONFIG_HOME="$test_home/.config" XDG_STATE_HOME="$test_home/.local/state" \
+            /bin/bash install.sh --link-only
+          HOME="$test_home" XDG_CONFIG_HOME="$test_home/.config" XDG_CACHE_HOME="$test_home/.cache" \
+            XDG_DATA_HOME="$test_home/.local/share" DOTFILES_SSH_AGENT_RELAY=0 \
+            zsh -lic '[[ -o interactive ]] && [[ -r "$HOME/.config/starship.toml" ]]'
+
+  macos-tools:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install native Apple Silicon tools and plugins
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          test "$(uname -m)" = arm64
+          test_home=$(mktemp -d)
+          echo "DOTFILES_CI_HOME=$test_home" >> "$GITHUB_ENV"
+          HOME="$test_home" XDG_CONFIG_HOME="$test_home/.config" \
+            XDG_DATA_HOME="$test_home/.local/share" XDG_STATE_HOME="$test_home/.local/state" \
+            /bin/bash install.sh
+      - name: Verify native zsh and mise
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          HOME="$DOTFILES_CI_HOME" XDG_CONFIG_HOME="$DOTFILES_CI_HOME/.config" \
+            XDG_DATA_HOME="$DOTFILES_CI_HOME/.local/share" XDG_STATE_HOME="$DOTFILES_CI_HOME/.local/state" \
+            XDG_CACHE_HOME="$DOTFILES_CI_HOME/.cache" \
+            zsh -lic 'set -e; mise doctor; ruby --version; python --version; node --version; go version; terraform version; starship --version; aws --version; gh --version; (( $+functions[_zsh_autosuggest_start] )); (( $+functions[_zsh_highlight] ))'

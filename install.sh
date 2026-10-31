@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
+source "$repo/scripts/platform.sh"
 migrate=false
 change_shell=false
 link_only=false
@@ -21,12 +22,27 @@ for arg in "$@"; do
     *) echo "Unknown option: $arg" >&2; exit 2 ;;
   esac
 done
-command -v python3 >/dev/null || { echo 'Install Python 3 first.' >&2; exit 1; }
-command -v zsh >/dev/null || { echo 'Install zsh first: sudo apt-get install zsh' >&2; exit 1; }
-link_args=()
-$migrate && link_args+=(--migrate)
+case "$(uname -s)" in
+  Darwin)
+    if [[ "$(sysctl -in sysctl.proc_translated 2>/dev/null || true)" == 1 ]]; then
+      echo 'Open a native Apple Silicon terminal instead of a Rosetta terminal, then retry.' >&2
+      exit 1
+    fi
+    dotfiles_load_homebrew
+    prerequisites='Install prerequisites with Homebrew: brew install python neovim git-lfs'
+    ;;
+  Linux) prerequisites='Install prerequisites: sudo apt-get install zsh git curl python3' ;;
+  *) echo 'Supported platforms: macOS and Linux.' >&2; exit 1 ;;
+esac
+for dependency in python3 zsh git curl tar; do
+  command -v "$dependency" >/dev/null || { echo "Missing $dependency. $prerequisites" >&2; exit 1; }
+done
+# Empty arrays with `set -u` fail in macOS's /bin/bash 3.2. Positional
+# arguments safely represent zero options on every supported Bash version.
+set --
+$migrate && set -- "$@" --migrate
 if $dry_run; then
-  python3 "$repo/scripts/link.py" --dry-run "${link_args[@]}"
+  python3 "$repo/scripts/link.py" --dry-run "$@"
   exit 0
 fi
 export PATH="$HOME/.local/bin:$PATH"
@@ -43,17 +59,15 @@ if ! $link_only; then
   MISE_GLOBAL_CONFIG_FILE="$repo/home/.config/mise/config.toml" mise -C "$repo" install
   bash "$repo/scripts/install-zsh-plugins.sh"
 fi
-python3 "$repo/scripts/link.py" "${link_args[@]}"
+python3 "$repo/scripts/link.py" "$@"
 if ! $link_only; then
   mise trust "$repo/home/.config/mise/config.toml"
   mise reshim
 fi
-zsh -n "$HOME/.zshrc" "$HOME/.zprofile" "$HOME/.zshenv" "$HOME/.config/zsh/environment.zsh"
+for script in "$HOME/.zshrc" "$HOME/.zprofile" "$HOME/.zshenv" "$HOME/.config/zsh/environment.zsh"; do
+  zsh -n "$script"
+done
 if $change_shell; then
-  zsh_path=$(command -v zsh)
-  if [[ "$(getent passwd "$(id -un)" | cut -d: -f7)" != "$zsh_path" ]]; then
-    echo "Changing your login shell to $zsh_path (may require your password)."
-    chsh -s "$zsh_path"
-  fi
+  dotfiles_change_shell
 fi
-echo 'Configuration linked. Open a new WSL terminal or run: exec zsh -l'
+echo 'Configuration linked. Open a new terminal or run: exec zsh -l'

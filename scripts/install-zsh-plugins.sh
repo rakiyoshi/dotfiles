@@ -14,11 +14,19 @@ install_plugin() {
     trap 'rm -rf -- "$temporary"' EXIT
     curl -fsSL "https://codeload.github.com/zsh-users/$name/tar.gz/$revision" \
       -o "$temporary/source.tar.gz"
-    if command -v sha256sum >/dev/null; then
-      printf '%s  %s\n' "$checksum" "$temporary/source.tar.gz" | sha256sum --check --status
-    else
-      printf '%s  %s\n' "$checksum" "$temporary/source.tar.gz" | shasum -a 256 --check --status
-    fi
+    # Python is already a bootstrap prerequisite. Avoid GNU/BSD checksum
+    # utility differences, including macOS sha256sum shims without long flags.
+    python3 - "$checksum" "$temporary/source.tar.gz" <<'PY'
+import hashlib
+import sys
+
+digest = hashlib.sha256()
+with open(sys.argv[2], 'rb') as archive:
+    for chunk in iter(lambda: archive.read(1024 * 1024), b''):
+        digest.update(chunk)
+if digest.hexdigest() != sys.argv[1]:
+    raise SystemExit('Plugin archive checksum mismatch: ' + sys.argv[2])
+PY
     mkdir "$temporary/source"
     tar -xzf "$temporary/source.tar.gz" -C "$temporary/source" --strip-components=1
     [[ -r "$temporary/source/$entrypoint" ]]
