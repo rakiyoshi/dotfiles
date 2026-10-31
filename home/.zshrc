@@ -11,7 +11,7 @@ bindkey '^U' backward-kill-line
 bindkey '^[[A' up-line-or-history
 bindkey '^[[B' down-line-or-history
 
-autoload -Uz compinit colors vcs_info
+autoload -Uz compinit colors
 mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 # Docker Desktop's completion link can dangle while its WSL distro is stopped.
 # A valid earlier definition lets compinit skip that broken system entry.
@@ -21,12 +21,9 @@ fi
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 colors
 zstyle ':completion:*' menu select
-zstyle ':vcs_info:git:*' formats ' %F{yellow}(%b)%f'
-setopt PROMPT_SUBST
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd vcs_info
-PROMPT='%F{green}%n@%m%f %F{blue}%~%f${vcs_info_msg_0_} %# '
-RPROMPT='%D{%Y-%m-%d %H:%M:%S}'
+# Keep the fallback anonymous too, even before Starship has been installed.
+PROMPT='%F{cyan}%~%f %F{green}❯%f '
+RPROMPT=''
 
 alias l='ls'
 alias ll='ls -l'
@@ -41,6 +38,9 @@ if (( $+commands[mise] )); then
 fi
 if (( $+commands[direnv] )); then
   eval "$(direnv hook zsh)"
+fi
+if (( $+commands[starship] )); then
+  eval "$(starship init zsh)"
 fi
 
 if [[ -t 0 ]]; then
@@ -60,4 +60,15 @@ fi
 # Machine-specific settings stay outside Git; accept the previous spelling too.
 [[ -r "$HOME/.zshrc_local" ]] && source "$HOME/.zshrc_local"
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+# Plugins are pinned source archives installed by scripts/install-zsh-plugins.sh.
+_zsh_plugins="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+ZSH_AUTOSUGGEST_STRATEGY=(history)
+[[ -r "$_zsh_plugins/zsh-autosuggestions/current/zsh-autosuggestions.zsh" ]] && \
+  source "$_zsh_plugins/zsh-autosuggestions/current/zsh-autosuggestions.zsh"
+# Syntax highlighting must load after other plugins and widget definitions.
+[[ -r "$_zsh_plugins/zsh-syntax-highlighting/current/zsh-syntax-highlighting.zsh" ]] && \
+  source "$_zsh_plugins/zsh-syntax-highlighting/current/zsh-syntax-highlighting.zsh"
+unset _zsh_plugins
 return 0

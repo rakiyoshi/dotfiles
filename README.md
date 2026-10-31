@@ -73,7 +73,24 @@ and run `mise install` directly if you prefer.
 
 ## zsh
 
-The shell has completion, shared history, Git branch information, the aliases
+The shell uses [Starship](https://starship.rs/) with a compact two-line prompt:
+cyan directory, purple Git branch, Git status, and the duration of commands that
+take at least two seconds. The prompt character turns red when a command fails.
+Username and hostname are hidden, including over SSH. No Nerd Font is required.
+
+[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) suggests
+commands from history in gray (press Right Arrow to accept), and
+[zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+colors commands as you type. Both are installed from pinned, checksum-verified
+upstream archives under `~/.local/share/zsh/plugins`, with no extra Git
+repositories or plugin manager. They are loaded only when installed;
+syntax highlighting is loaded last. Starship is pinned and installed by mise.
+
+The installer sets up the prompt and plugins automatically. To add them to an
+already linked installation, run `bash ~/.local/share/dotfiles/install.sh`, then
+`exec zsh -l`. Edit `home/.config/starship.toml` to customize the prompt.
+
+The shell also has completion, shared history, the aliases
 from the fish configuration, and mise/direnv activation. Go, Cargo, npm-global,
 Deno, Aqua, Neovim, and Codex paths are preserved. Machine settings can be added
 to `~/.zshrc.local`; the previous `~/.zshrc_local` spelling is also supported.

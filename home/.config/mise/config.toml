@@ -7,6 +7,7 @@ node = "16.13.0"
 direnv = "2.36.0"
 helm = "3.7.1"
 kubectl = "1.23.1"
+starship = "1.27.0"
 
 [settings]
 # Keep project .ruby-version/.python-version/.go-version/.node-version support.

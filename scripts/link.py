@@ -14,6 +14,7 @@ MANAGED = [
     '.gitignore_global', 'aqua.yaml', 'aqua-checksums.json',
     '.config/zsh', '.config/mise/config.toml', '.config/git/ignore',
     '.config/nvim', '.config/aquaproj-aqua/aqua.yaml',
+    '.config/starship.toml',
     '.local/bin/wsl-ssh-agent',
 ]
 RETIRED = ['.config/fish', '.tool-versions', '.asdfrc']
