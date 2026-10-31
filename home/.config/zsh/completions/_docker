@@ -1,0 +1,3 @@
+#compdef docker
+# Generic file completion when Docker Desktop's WSL completion is unavailable.
+_files
