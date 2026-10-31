@@ -11,13 +11,14 @@ import sys
 REPO = Path(__file__).resolve().parents[1]
 MANAGED = [
     '.zshrc', '.zprofile', '.zshenv', '.gitconfig', '.vimrc', '.agignore',
-    '.gitignore_global', 'aqua.yaml', 'aqua-checksums.json',
+    '.gitignore_global',
     '.config/zsh', '.config/mise/config.toml', '.config/git/ignore',
-    '.config/nvim', '.config/aquaproj-aqua/aqua.yaml',
+    '.config/nvim',
     '.config/starship.toml',
     '.local/bin/wsl-ssh-agent',
 ]
-RETIRED = ['.config/fish', '.tool-versions', '.asdfrc']
+AQUA_RETIRED = ['aqua.yaml', 'aqua-checksums.json', '.config/aquaproj-aqua/aqua.yaml']
+RETIRED = ['.config/fish', '.tool-versions', '.asdfrc'] + AQUA_RETIRED
 
 
 def exists(path):
@@ -98,7 +99,23 @@ def main():
             saved = backup / 'home' / item['path']
             if exists(target):
                 saved.parent.mkdir(parents=True, exist_ok=True)
-                shutil.move(str(target), str(saved))
+                recovered = None
+                # An upgrade may already have removed this repository's old
+                # Aqua sources. Recover the pre-upgrade local snapshot rather
+                # than saving a link that cannot be restored independently.
+                if (item['path'] in AQUA_RETIRED and target.is_symlink()
+                        and not target.exists()
+                        and target.resolve() == REPO / 'home' / item['path']):
+                    snapshots = state / 'dotfiles/aqua-retirement'
+                    recovered = next((p for p in sorted(
+                        snapshots.glob('*/' + item['path']), reverse=True
+                    ) if p.is_file()), None)
+                if recovered:
+                    shutil.copy2(recovered, saved)
+                    target.unlink()
+                    item['recovered_from'] = str(recovered)
+                else:
+                    shutil.move(str(target), str(saved))
                 if saved.is_symlink():
                     link = os.readlink(saved)
                     item['original_symlink'] = link

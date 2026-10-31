@@ -1,6 +1,6 @@
 # dotfiles
 
-One repository for zsh, mise, Git, Vim/Neovim, and Aqua configuration.
+One repository for zsh, mise, Git, and Vim/Neovim configuration.
 No homeshick, castles, asdf shell initialization, rbenv initialization, Prezto,
 or shell plugin manager is required. `ConEmu.xml` remains available for Windows.
 
@@ -36,7 +36,8 @@ exec zsh -l
 ```
 
 `--migrate` also backs up and retires the fish configuration, `~/.tool-versions`,
-and `~/.asdfrc`, so the old global asdf settings cannot override mise.
+`~/.asdfrc`, and the legacy global Aqua configuration, so old settings cannot
+override mise.
 Project `.tool-versions` files continue to work, including `nodejs`/`golang`
 aliases; `.ruby-version` and other configured idiomatic version files work too.
 
@@ -55,11 +56,26 @@ Terraform 1.1.8, direnv 2.36.0, Helm 3.7.1, and kubectl 1.23.1.
 Installations are native mise installs, independent of the old asdf runtimes.
 Previously installed Ruby gems and Python packages are not automatically copied.
 
-Aqua's existing tool selection is preserved in `home/aqua.yaml`; its additional
-configuration file is preserved under `home/.config/aquaproj-aqua/`. mise owns
-the overlapping global runtimes (Go and Terraform) because its activation puts
-the selected versions before Aqua on PATH. Existing Aqua binaries are reused;
-install Aqua separately when setting up a new machine that needs those tools.
+All CLI tools are installed and versioned by mise; the Aqua executable is not
+required. GitHub CLI, ecspresso, AWS CLI, and the existing linting, security, and
+Terraform utilities are pinned in the same mise configuration. The migration
+preserves installed tool versions, except Trivy: 0.61.1 was unavailable for
+download, so it was upgraded to 0.76.1 with the owner's approval.
+
+The first Go/Terraform version in each list remains the default. The former
+global Aqua versions (Go 1.27.1 and Terraform 1.13.5) are installed as alternatives.
+Use a project's mise configuration to select a different version when needed.
+
+Some tool identifiers start with `aqua:`. These select mise's built-in registry
+backend, which installs the tools itself without an Aqua installation.
+Other repositories' `aqua.yaml` files and CI workflows are not converted by this
+dotfiles installer. They must be migrated within their own repositories to
+preserve project-specific tool versions; mise does not read those YAML files.
+
+The shell removes inherited Aqua paths and clears its global configuration
+variables. The old Aqua cache is retained for rollback but is not used. Run
+`bash ~/.local/share/dotfiles/install.sh --migrate` to retire old home-directory
+configuration links when updating an already installed setup.
 
 To update a global runtime, for example Ruby:
 
@@ -92,7 +108,7 @@ already linked installation, run `bash ~/.local/share/dotfiles/install.sh`, then
 
 The shell also has completion, shared history, the aliases
 from the fish configuration, and mise/direnv activation. Go, Cargo, npm-global,
-Deno, Aqua, Neovim, and Codex paths are preserved. Machine settings can be added
+Deno, Neovim, and Codex paths are preserved. Machine settings can be added
 to `~/.zshrc.local`; the previous `~/.zshrc_local` spelling is also supported.
 
 On WSL, when `socat` and `npiperelay.exe` are present, `wsl-ssh-agent` reuses or

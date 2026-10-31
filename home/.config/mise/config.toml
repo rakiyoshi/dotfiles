@@ -1,13 +1,33 @@
 [tools]
-terraform = "1.1.8"
+terraform = ["1.1.8", "1.13.5"]
 ruby = "4.0.9"
 python = "3.14.2"
-go = "1.24.2"
+go = ["1.24.2", "1.27.1"]
 node = "16.13.0"
 direnv = "2.36.0"
 helm = "3.7.1"
 kubectl = "1.23.1"
 starship = "1.27.0"
+gh = "2.83.0"
+ecspresso = "2.6.3"
+# Existing Aqua tool versions, except the approved Trivy upgrade below.
+actionlint = "1.7.7"
+aws = "2.31.32"
+conftest = "0.56.0"
+golangci-lint = "2.4.0"
+opa = "1.1.0"
+reviewdog = "0.20.3"
+shellcheck = "0.10.0"
+slsa-verifier = "2.7.0"
+tflint = "0.55.0"
+tfsec = "1.28.13"
+tfmigrate = "0.4.6"
+trivy = "0.76.1"
+"aqua:int128/ghcp" = "1.13.5"
+"aqua:suzuki-shunsuke/ci-info" = "2.4.0"
+"aqua:suzuki-shunsuke/github-comment" = "6.3.1"
+"aqua:suzuki-shunsuke/tfcmt" = "4.14.1"
+"go:github.com/hashicorp/terraform-config-inspect" = "d2d12f9a63bbb1fe34ea81ec84c9cb11d8514c17"
 
 [settings]
 # Keep project .ruby-version/.python-version/.go-version/.node-version support.
