@@ -41,6 +41,7 @@ if ! $link_only; then
   fi
   export GOPATH="${GOPATH:-$HOME/.go}"
   MISE_GLOBAL_CONFIG_FILE="$repo/home/.config/mise/config.toml" mise -C "$repo" install
+  bash "$repo/scripts/install-zsh-plugins.sh"
 fi
 python3 "$repo/scripts/link.py" "${link_args[@]}"
 if ! $link_only; then
