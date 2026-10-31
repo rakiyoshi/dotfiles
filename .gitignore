@@ -1,0 +1,12 @@
+.DS_Store
+*.local
+!home/.local/
+*.local.*
+*.zwc
+.zcompdump*
+.zsh_history
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
