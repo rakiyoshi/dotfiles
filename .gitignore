@@ -1,5 +1,6 @@
 .DS_Store
 *.local
+!home/.local/
 *.local.*
 *.zwc
 .zcompdump*

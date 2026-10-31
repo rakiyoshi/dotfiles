@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Bridge WSL SSH clients to the existing Windows OpenSSH agent.
+set -eu
+command -v socat >/dev/null || exit 0
+command -v npiperelay.exe >/dev/null || exit 0
+command -v flock >/dev/null || exit 0
+export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-$HOME/.ssh/agent.sock}"
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+mkdir -p "$cache" "$HOME/.ssh"
+exec 9>"$cache/ssh-agent-relay.lock"
+flock -n 9 || exit 0
+
+# ssh-add returns 1 for a live agent with no keys; 2 means unavailable.
+status=0
+ssh-add -l >/dev/null 2>&1 || status=$?
+[[ $status -le 1 ]] && exit 0
+[[ ! -S "$SSH_AUTH_SOCK" ]] || rm -- "$SSH_AUTH_SOCK"
+[[ ! -e "$SSH_AUTH_SOCK" ]] || exit 0
+nohup setsid socat "UNIX-LISTEN:$SSH_AUTH_SOCK,fork,mode=600" \
+  'EXEC:npiperelay.exe -ei -s //./pipe/openssh-ssh-agent,nofork' \
+  >"$cache/ssh-agent-relay.log" 2>&1 < /dev/null 9>&- &
