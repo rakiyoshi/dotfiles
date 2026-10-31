@@ -9,7 +9,7 @@ helm = "3.7.1"
 kubectl = "1.23.1"
 starship = "1.27.0"
 gh = "2.83.0"
-ecspresso = "2.6.3"
+ecspresso = "2.8.7"
 # Existing Aqua tool versions, except the approved Trivy upgrade below.
 actionlint = "1.7.12"
 aws = "2.31.32"
