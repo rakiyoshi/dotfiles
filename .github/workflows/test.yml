@@ -20,7 +20,12 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Linux test prerequisite
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y zsh
+        run: |
+          sudo apt-get update && sudo apt-get install -y zsh
+          # The hosted image has insecure system completion directories.
+          # Restore normal ownership/permissions instead of bypassing compaudit.
+          sudo chown root:root /usr/share/zsh /usr/share/zsh/vendor-completions
+          sudo chmod 755 /usr/share/zsh /usr/share/zsh/vendor-completions
       - name: Install pinned plugins for interactive integration tests
         run: |
           plugin_data=$(mktemp -d "$HOME/.dotfiles-plugin-tests.XXXXXX")
