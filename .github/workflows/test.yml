@@ -22,11 +22,16 @@ jobs:
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y zsh
       - name: Install pinned plugins for interactive integration tests
-        run: XDG_DATA_HOME="$RUNNER_TEMP/dotfiles-plugin-tests" /bin/bash scripts/install-zsh-plugins.sh
+        run: |
+          plugin_data=$(mktemp -d "$HOME/.dotfiles-plugin-tests.XXXXXX")
+          echo "DOTFILES_TEST_PLUGIN_DATA=$plugin_data" >> "$GITHUB_ENV"
+          XDG_DATA_HOME="$plugin_data" /bin/bash scripts/install-zsh-plugins.sh
+      - name: Check completion directory permissions
+        run: |
+          zsh -fc 'fpath=("$DOTFILES_TEST_PLUGIN_DATA/zsh/plugins/zsh-abbr/current/completions" $fpath); autoload -Uz compaudit; compaudit'
       - name: Test installer and rollback with the system Bash
         env:
           DOTFILES_TEST_BASH: /bin/bash
-          DOTFILES_TEST_PLUGIN_DATA: ${{ runner.temp }}/dotfiles-plugin-tests
         run: python3 -m unittest discover -s tests -v
       - name: Check shell syntax
         run: |
