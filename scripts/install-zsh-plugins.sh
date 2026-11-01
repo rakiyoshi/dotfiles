@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Pinned upstream source archives; no extra Git repositories or plugin manager.
 set -euo pipefail
+# Completion directories must not inherit a group-writable caller umask.
+umask 022
 root="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"
 mkdir -p "$root"
 
