@@ -11,6 +11,9 @@ bindkey '^U' backward-kill-line
 bindkey '^[[A' up-line-or-history
 bindkey '^[[B' down-line-or-history
 
+_zsh_plugins="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"
+[[ ! -d "$_zsh_plugins/zsh-abbr/current/completions" ]] || \
+  fpath=("$_zsh_plugins/zsh-abbr/current/completions" $fpath)
 autoload -Uz compinit colors
 mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 # Docker Desktop's completion link can dangle while its WSL distro is stopped.
@@ -24,13 +27,6 @@ zstyle ':completion:*' menu select
 # Keep the fallback anonymous too, even before Starship has been installed.
 PROMPT='%F{cyan}%~%f %F{green}❯%f '
 RPROMPT=''
-
-alias l='ls'
-alias ll='ls -l'
-alias la='ls -la'
-alias al='ls -la'
-alias cp='cp -i'
-(( $+commands[nvim] )) && alias vim='nvim'
 
 # mise owns runtime selection. Do not initialize asdf or rbenv here.
 if (( $+commands[mise] )); then
@@ -62,7 +58,16 @@ fi
 [[ -r "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
 
 # Plugins are pinned source archives installed by scripts/install-zsh-plugins.sh.
-_zsh_plugins="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"
+if [[ -r "$_zsh_plugins/zsh-abbr/current/zsh-abbr.zsh" && \
+      -r "$_zsh_plugins/zsh-abbr/current/zsh-job-queue/zsh-job-queue.zsh" ]]; then
+  ABBR_USER_ABBREVIATIONS_FILE=${ABBR_USER_ABBREVIATIONS_FILE:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh/abbreviations}
+  ABBR_TMPDIR=${ABBR_TMPDIR:-${XDG_CACHE_HOME:-$HOME/.cache}/zsh-abbr}
+  JOB_QUEUE_TMPDIR=${JOB_QUEUE_TMPDIR:-$ABBR_TMPDIR/job-queue}
+  (umask 077; mkdir -p "$ABBR_TMPDIR" "$JOB_QUEUE_TMPDIR")
+  source "$_zsh_plugins/zsh-abbr/current/zsh-abbr.zsh"
+  # Keep the previous conditional Vim shortcut: only use Neovim when present.
+  (( ! $+commands[nvim] )) || abbr --session --force --quiet vim='nvim'
+fi
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 ZSH_AUTOSUGGEST_STRATEGY=(history)
 [[ -r "$_zsh_plugins/zsh-autosuggestions/current/zsh-autosuggestions.zsh" ]] && \

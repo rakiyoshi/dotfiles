@@ -20,7 +20,20 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Install Linux test prerequisite
         if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install -y zsh
+        run: |
+          sudo apt-get update && sudo apt-get install -y zsh
+          # The hosted image has insecure system completion directories.
+          # Restore normal ownership/permissions instead of bypassing compaudit.
+          sudo chown root:root /usr/share/zsh /usr/share/zsh/vendor-completions
+          sudo chmod 755 /usr/share/zsh /usr/share/zsh/vendor-completions
+      - name: Install pinned plugins for interactive integration tests
+        run: |
+          plugin_data=$(mktemp -d "$HOME/.dotfiles-plugin-tests.XXXXXX")
+          echo "DOTFILES_TEST_PLUGIN_DATA=$plugin_data" >> "$GITHUB_ENV"
+          XDG_DATA_HOME="$plugin_data" /bin/bash scripts/install-zsh-plugins.sh
+      - name: Check completion directory permissions
+        run: |
+          zsh -fc 'fpath=("$DOTFILES_TEST_PLUGIN_DATA/zsh/plugins/zsh-abbr/current/completions" $fpath); autoload -Uz compaudit; compaudit'
       - name: Test installer and rollback with the system Bash
         env:
           DOTFILES_TEST_BASH: /bin/bash
@@ -64,4 +77,4 @@ jobs:
           HOME="$DOTFILES_CI_HOME" XDG_CONFIG_HOME="$DOTFILES_CI_HOME/.config" \
             XDG_DATA_HOME="$DOTFILES_CI_HOME/.local/share" XDG_STATE_HOME="$DOTFILES_CI_HOME/.local/state" \
             XDG_CACHE_HOME="$DOTFILES_CI_HOME/.cache" \
-            zsh -lic 'set -e; mise doctor; ruby --version; python --version; node --version; go version; terraform version; starship --version; aws --version; gh --version; (( $+functions[_zsh_autosuggest_start] )); (( $+functions[_zsh_highlight] ))'
+            zsh -lic 'set -e; mise doctor; ruby --version; python --version; node --version; go version; terraform version; starship --version; aws --version; gh --version; abbr --version; (( $+functions[_zsh_autosuggest_start] )); (( $+functions[_zsh_highlight] ))'
