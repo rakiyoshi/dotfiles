@@ -125,6 +125,27 @@ upstream archives under `~/.local/share/zsh/plugins`, with no extra Git
 repositories or plugin manager. They are loaded only when installed;
 syntax highlighting is loaded last. Starship is pinned and installed by mise.
 
+[zsh-abbr](https://github.com/olets/zsh-abbr) provides fish-style abbreviations:
+Space expands a short name visibly on the command line, and Enter expands and
+runs it. Version 6.5.2 and its exact zsh-job-queue dependency are installed from
+SHA-256-verified archives. Their files are checked before loading; startup does
+not clone or fetch missing dependencies. Temporary state uses a private cache
+directory under `~/.cache/zsh-abbr`.
+
+For example:
+
+```zsh
+abbr gstatus='git status'
+# Type gstatus followed by Space to see: git status
+abbr erase gstatus
+```
+
+Definitions persist in `home/.config/zsh/abbreviations` through the linked
+configuration directory. The plugin updates this tracked file when you add or
+remove abbreviations; review and commit those edits to share them across machines.
+Existing command names are protected: use `--force` only when you deliberately
+want to override one. Ctrl-Space inserts a space without expanding.
+
 The installer sets up the prompt and plugins automatically. To add them to an
 already linked installation, run `bash ~/.local/share/dotfiles/install.sh`, then
 `exec zsh -l`. Edit `home/.config/starship.toml` to customize the prompt.

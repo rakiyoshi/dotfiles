@@ -1,0 +1,2 @@
+# Persistent zsh-abbr definitions. Add entries with: abbr gstatus="git status"
+# The plugin rewrites this file when abbreviations are added or removed.

@@ -21,9 +21,12 @@ jobs:
       - name: Install Linux test prerequisite
         if: runner.os == 'Linux'
         run: sudo apt-get update && sudo apt-get install -y zsh
+      - name: Install pinned plugins for interactive integration tests
+        run: XDG_DATA_HOME="$RUNNER_TEMP/dotfiles-plugin-tests" /bin/bash scripts/install-zsh-plugins.sh
       - name: Test installer and rollback with the system Bash
         env:
           DOTFILES_TEST_BASH: /bin/bash
+          DOTFILES_TEST_PLUGIN_DATA: ${{ runner.temp }}/dotfiles-plugin-tests
         run: python3 -m unittest discover -s tests -v
       - name: Check shell syntax
         run: |
@@ -64,4 +67,4 @@ jobs:
           HOME="$DOTFILES_CI_HOME" XDG_CONFIG_HOME="$DOTFILES_CI_HOME/.config" \
             XDG_DATA_HOME="$DOTFILES_CI_HOME/.local/share" XDG_STATE_HOME="$DOTFILES_CI_HOME/.local/state" \
             XDG_CACHE_HOME="$DOTFILES_CI_HOME/.cache" \
-            zsh -lic 'set -e; mise doctor; ruby --version; python --version; node --version; go version; terraform version; starship --version; aws --version; gh --version; (( $+functions[_zsh_autosuggest_start] )); (( $+functions[_zsh_highlight] ))'
+            zsh -lic 'set -e; mise doctor; ruby --version; python --version; node --version; go version; terraform version; starship --version; aws --version; gh --version; abbr --version; (( $+functions[_zsh_autosuggest_start] )); (( $+functions[_zsh_highlight] ))'
