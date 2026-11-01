@@ -28,13 +28,6 @@ zstyle ':completion:*' menu select
 PROMPT='%F{cyan}%~%f %F{green}❯%f '
 RPROMPT=''
 
-alias l='ls'
-alias ll='ls -l'
-alias la='ls -la'
-alias al='ls -la'
-alias cp='cp -i'
-(( $+commands[nvim] )) && alias vim='nvim'
-
 # mise owns runtime selection. Do not initialize asdf or rbenv here.
 if (( $+commands[mise] )); then
   eval "$(mise activate zsh)"
@@ -72,6 +65,8 @@ if [[ -r "$_zsh_plugins/zsh-abbr/current/zsh-abbr.zsh" && \
   JOB_QUEUE_TMPDIR=${JOB_QUEUE_TMPDIR:-$ABBR_TMPDIR/job-queue}
   (umask 077; mkdir -p "$ABBR_TMPDIR" "$JOB_QUEUE_TMPDIR")
   source "$_zsh_plugins/zsh-abbr/current/zsh-abbr.zsh"
+  # Keep the previous conditional Vim shortcut: only use Neovim when present.
+  (( ! $+commands[nvim] )) || abbr --session --force --quiet vim='nvim'
 fi
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 ZSH_AUTOSUGGEST_STRATEGY=(history)

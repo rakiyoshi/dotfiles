@@ -24,6 +24,11 @@ class AbbreviationIntegrationTests(unittest.TestCase):
             config.mkdir()
             (config / 'zsh').symlink_to(REPO / 'home/.config/zsh', target_is_directory=True)
             storage = home / 'user-abbreviations'
+            shutil.copyfile(REPO / 'home/.config/zsh/abbreviations', storage)
+            (home / '.local/bin').mkdir(parents=True)
+            nvim = home / '.local/bin/nvim'
+            nvim.write_text('#!/bin/sh\nexit 0\n')
+            nvim.chmod(0o755)
             output = home / 'enter-output'
             (home / '.zshenv').write_text('skip_global_compinit=1\n')
             rc = 'source ' + shlex.quote(str(REPO / 'home/.zshrc')) + '\n'
@@ -65,6 +70,15 @@ class AbbreviationIntegrationTests(unittest.TestCase):
                     time.sleep(0.04)
 
             try:
+                expect('ABBR_TEST> ')
+                for short, expanded in [('l', 'ls'), ('ll', 'ls -l'),
+                                        ('la', 'ls -la'), ('al', 'ls -la'),
+                                        ('cp', 'cp -i'), ('vim', 'nvim')]:
+                    type_keys((short + ' \x18').encode())
+                    expect('CAPTURE<' + expanded + ' >')
+                    expect('ABBR_TEST> ')
+                type_keys(b'cp file \x18')
+                expect('CAPTURE<cp -i file >')
                 expect('ABBR_TEST> ')
                 type_keys(b'zzabbr \x18')
                 expect('CAPTURE<git status >')

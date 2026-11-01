@@ -1,2 +1,7 @@
 # Persistent zsh-abbr definitions. Add entries with: abbr gstatus="git status"
 # The plugin rewrites this file when abbreviations are added or removed.
+abbr --force l="ls"
+abbr --force ll="ls -l"
+abbr --force la="ls -la"
+abbr --force al="ls -la"
+abbr --force cp="cp -i"
