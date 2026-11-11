@@ -91,14 +91,12 @@ Use a project's mise configuration to select a different version when needed.
 
 Some tool identifiers start with `aqua:`. These select mise's built-in registry
 backend, which installs the tools itself without an Aqua installation.
-Other repositories' `aqua.yaml` files and CI workflows are not converted by this
-dotfiles installer. They must be migrated within their own repositories to
-preserve project-specific tool versions; mise does not read those YAML files.
-
-The shell removes inherited Aqua paths and clears its global configuration
-variables. The old Aqua cache is retained for rollback but is not used. Run
-`bash ~/.local/share/dotfiles/install.sh --migrate` to retire old home-directory
-configuration links when updating an already installed setup.
+For projects that use standalone Aqua, install Aqua separately and run
+`aqua install` in the project directory. Login and interactive zsh sessions
+include `${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin`
+on PATH, after existing entries. The shell preserves `AQUA_ROOT_DIR` and
+`AQUA_GLOBAL_CONFIG` when set. Use the installer without `--migrate` to keep
+existing home-directory Aqua configuration.
 
 To update a global runtime, for example Ruby:
 
