@@ -7,12 +7,6 @@ export LESSCHARSET=utf-8
 # Inherited fish/asdf/rbenv paths must not override mise's version selection.
 path=(${path:#${HOME}/.asdf/*})
 path=(${path:#${HOME}/.rbenv/shims})
-# Remove Aqua paths inherited from an already-running terminal as well.
-for _aqua_root in "${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}" \
-                  "${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua"; do
-  path=(${path:#${_aqua_root}/*})
-done
-unset AQUA_GLOBAL_CONFIG AQUA_ROOT_DIR _aqua_root
 
 # Homebrew provides bootstrap packages on macOS; mise selects tool versions.
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -34,6 +28,7 @@ path=(
   "$DENO_INSTALL/bin"
   "$HOME/.oci/bin"
   $path
+  "${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin"
 )
 if [[ "$OSTYPE" == linux* ]]; then
   [[ ! -d /snap/bin ]] || path=(/snap/bin $path)
