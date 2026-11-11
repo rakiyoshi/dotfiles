@@ -79,18 +79,15 @@ Renovate. See `docs/` for historical migration versions and decisions.
 Installations are native mise installs, independent of the old asdf runtimes.
 Previously installed Ruby gems and Python packages are not automatically copied.
 
-All CLI tools are installed and versioned by mise; the Aqua executable is not
-required. GitHub CLI, ecspresso, AWS CLI, and the existing linting, security, and
-Terraform utilities are pinned in the same mise configuration. The migration
-preserves installed tool versions, except Trivy: 0.61.1 was unavailable for
-download, so it was upgraded to 0.76.1 with the owner's approval.
+The global mise configuration pins GitHub CLI, ecspresso, AWS CLI, Actionlint,
+ShellCheck, and the runtimes and tools listed in the configuration.
 
 The first Go/Terraform version in each list is the default. Secondary versions
 remain available as alternatives; Renovate updates only the primary versions.
 Use a project's mise configuration to select a different version when needed.
 
-Some tool identifiers start with `aqua:`. These select mise's built-in registry
-backend, which installs the tools itself without an Aqua installation.
+mise can install tools through its built-in Aqua backend without a standalone
+Aqua installation.
 For projects that use standalone Aqua, install Aqua separately and run
 `aqua install` in the project directory. Login and interactive zsh sessions
 include `${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin`
