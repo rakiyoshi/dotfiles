@@ -11,7 +11,7 @@ starship = "1.27.0"
 gh = "2.103.3"
 ecspresso = "2.8.8"
 actionlint = "1.7.12"
-aws = "2.40.0"
+aws = "2.40.3"
 shellcheck = "0.11.0"
 
 [settings]
